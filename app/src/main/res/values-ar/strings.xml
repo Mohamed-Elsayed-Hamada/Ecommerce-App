@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">المتجر</string>
+    <string name="title_home">الرئيسية</string>
+    <string name="title_categories">الأقسام</string>
+    <string name="title_cart">السلة</string>
+    <string name="title_profile">حسابي</string>
+    <string name="title_products">المنتجات</string>
+
+</resources>

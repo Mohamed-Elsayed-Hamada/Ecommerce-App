@@ -27,7 +27,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="24dp"
                 android:contentDescription="App Logo"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/logo"
                 android:scaleType="fitCenter"/>
 
             <!-- Welcome -->

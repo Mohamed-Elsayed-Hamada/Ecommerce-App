@@ -7,37 +7,43 @@ data class CartItem(
     val productId: String,
     val title: String,
     val imageCover: String,
-    val price: Int,
+    val price: Double,
     val count: Int,
     val availableQuantity: Int,
     val rating: Double,
     val brandName: String
 )
+
 data class Cart(
     val cartId: String,
     val products: List<CartItem>,
-    val totalPrice: Int,
+    val totalPrice: Double,
     val numberOfItems: Int
 )
+
+/**
+ * The single cart mapper. `numberOfItems` is the sum of units (not the number of
+ * lines) — one definition shared by every screen.
+ */
 fun CartResponseData.toDomain(): Cart {
+    val items = products.orEmpty().map { product ->
+        CartItem(
+            id = product.id,
+            productId = product.product.id.ifBlank { product.product._id },
+            title = product.product.title,
+            imageCover = product.product.imageCover,
+            price = product.price,
+            count = product.count,
+            availableQuantity = product.product.quantity,
+            rating = product.product.ratingsAverage,
+            brandName = product.product.brand?.name.orEmpty()
+        )
+    }
 
     return Cart(
         cartId = id,
-        products = products.map { product ->
-
-            CartItem(
-                id = product.id,
-                productId = product.product.id,
-                title = product.product.title,
-                imageCover = product.product.imageCover,
-                price = product.price,
-                count = product.count,
-                availableQuantity = product.product.quantity,
-                rating = product.product.ratingsAverage,
-                brandName = product.product.brand.name
-            )
-        },
+        products = items,
         totalPrice = totalCartPrice,
-        numberOfItems = products.sumOf { it.count }
+        numberOfItems = items.sumOf { it.count }
     )
 }

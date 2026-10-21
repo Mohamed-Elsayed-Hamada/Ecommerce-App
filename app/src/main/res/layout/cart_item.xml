@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.ECommerce.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginHorizontal="12dp"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    android:layout_marginHorizontal="@dimen/screen_padding"
+    android:layout_marginVertical="@dimen/space_xs">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/space_md">
 
         <!-- Product information -->
         <LinearLayout
@@ -23,128 +22,149 @@
             android:orientation="horizontal">
 
             <!-- Product image -->
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivProductImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="#F5F5F5"
+                android:layout_width="@dimen/cart_item_image_size"
+                android:layout_height="@dimen/cart_item_image_size"
+                android:background="@color/inputBackgroundColor"
                 android:scaleType="centerCrop"
-                android:contentDescription="Product image"
+                android:contentDescription="@string/desc_product_image"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <!-- Product details -->
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="@dimen/space_md"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvProductTitle"
+                    style="@style/TextAppearance.ECommerce.BodyLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:text="Woman Shawl"
-                    android:textColor="#222222"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="Woman Shawl" />
 
                 <TextView
                     android:id="@+id/tvBrand"
+                    style="@style/TextAppearance.ECommerce.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="DeFacto"
-                    android:textColor="#777777"
-                    android:textSize="13sp" />
+                    android:layout_marginTop="@dimen/space_xxs"
+                    tools:text="DeFacto" />
 
-                <TextView
-                    android:id="@+id/tvRating"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="⭐ 4.1"
-                    android:textColor="#555555"
-                    android:textSize="13sp" />
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@string/desc_rating_star"
+                        app:srcCompat="@drawable/ic_star_filled"
+                        app:tint="@color/ratingStarColor" />
+
+                    <TextView
+                        android:id="@+id/tvRating"
+                        style="@style/TextAppearance.ECommerce.BodySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_xxs"
+                        tools:text="4.1" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvPrice"
+                    style="@style/TextAppearance.ECommerce.Price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="149 EGP"
-                    android:textColor="#2E7D32"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="@dimen/space_xs"
+                    tools:text="149 EGP" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Bottom controls -->
+        <!-- Divider line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/space_md"
+            android:layout_marginBottom="@dimen/space_sm"
+            android:background="@color/dividerColor" />
 
+        <!-- Bottom controls -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
+                style="@style/TextAppearance.ECommerce.BodyMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Quantity"
-                android:textColor="#555555"
-                android:textSize="14sp" />
+                android:text="@string/quantity_label" />
 
-            <!-- Decrease -->
+            <!-- Quantity Counter Container -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_quantity_container"
+                android:padding="@dimen/space_xxs"
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/btnDecrease"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Decrease quantity"
-                android:src="@android:drawable/ic_menu_delete"
-                />
+                <!-- Decrease -->
+                <ImageButton
+                    android:id="@+id/btnDecrease"
+                    android:layout_width="@dimen/icon_button_size_small"
+                    android:layout_height="@dimen/icon_button_size_small"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/desc_decrease_quantity"
+                    android:src="@drawable/ic_remove"
+                    app:tint="@color/colorOnSurfaceVariant" />
 
-            <!-- Quantity -->
+                <!-- Quantity -->
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    style="@style/TextAppearance.ECommerce.TitleSmall"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="1" />
 
-            <TextView
-                android:id="@+id/tvQuantity"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="#222222"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <!-- Increase -->
+                <ImageButton
+                    android:id="@+id/btnIncrease"
+                    android:layout_width="@dimen/icon_button_size_small"
+                    android:layout_height="@dimen/icon_button_size_small"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/desc_increase_quantity"
+                    android:src="@drawable/ic_add"
+                    app:tint="@color/colorPrimary" />
 
-            <!-- Increase -->
-
-            <ImageButton
-                android:id="@+id/btnIncrease"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Increase quantity"
-                android:src="@android:drawable/ic_menu_add" />
+            </LinearLayout>
 
             <!-- Delete -->
-
             <ImageButton
                 android:id="@+id/btnDelete"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="12dp"
+                android:layout_width="@dimen/icon_button_size_small"
+                android:layout_height="@dimen/icon_button_size_small"
+                android:layout_marginStart="@dimen/space_md"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Remove from cart"
-                android:src="@android:drawable/button_onoff_indicator_off" />
+                android:contentDescription="@string/desc_remove_item"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/colorError" />
 
         </LinearLayout>
 

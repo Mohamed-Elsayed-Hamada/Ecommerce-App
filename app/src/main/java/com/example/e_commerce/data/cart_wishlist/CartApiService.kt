@@ -14,7 +14,7 @@ import retrofit2.http.Path
 interface CartApiService {
 
     @POST("v2/cart")
-    suspend fun addToCart(@Body request: AddToCartRequest): Response<CartResponse?>
+    suspend fun addToCart(@Body request: AddToCartRequest): Response<CartResponse>
 
     @PUT("v2/cart/{id}")
     suspend fun updateCart(

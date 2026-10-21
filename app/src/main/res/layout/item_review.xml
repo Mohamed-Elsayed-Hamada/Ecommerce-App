@@ -1,53 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.ECommerce.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="1dp">
+    android:layout_marginBottom="@dimen/space_sm"
+    app:cardElevation="@dimen/elevation_subtle">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/space_md">
 
+        <!-- Reviewer Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <!-- Avatar Initial Circle -->
+            <TextView
+                android:id="@+id/tvAvatarInitial"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_avatar"
+                android:gravity="center"
+                android:textColor="@color/colorOnPrimaryContainer"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="M" />
+
+            <!-- Name -->
             <TextView
                 android:id="@+id/tvReviewerName"
+                style="@style/TextAppearance.ECommerce.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_md"
                 android:layout_weight="1"
-                android:text="Mohamed"
-                android:textColor="#222222"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Mohamed" />
 
-            <TextView
-                android:id="@+id/tvReviewRating"
+            <!-- Rating badge -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⭐ 5"
-                android:textSize="14sp" />
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_quantity_container"
+                android:paddingHorizontal="@dimen/space_sm"
+                android:paddingVertical="@dimen/space_xxs"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:contentDescription="@string/desc_rating_star"
+                    app:srcCompat="@drawable/ic_star_filled"
+                    app:tint="@color/ratingStarColor" />
+
+                <TextView
+                    android:id="@+id/tvReviewRating"
+                    style="@style/TextAppearance.ECommerce.BodySmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_xxs"
+                    android:textStyle="bold"
+                    tools:text="5.0" />
+            </LinearLayout>
 
         </LinearLayout>
 
+        <!-- Review comment -->
         <TextView
             android:id="@+id/tvReview"
+            style="@style/TextAppearance.ECommerce.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Great product"
-            android:textColor="#555555"
-            android:textSize="14sp" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:lineSpacingExtra="3dp"
+            tools:text="Great product! Exceeded my expectations in quality and speed of delivery." />
 
     </LinearLayout>
 

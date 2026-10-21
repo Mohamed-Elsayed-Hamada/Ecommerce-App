@@ -19,7 +19,7 @@ data class ProductsRequest(
         page?.let { map["page"] = it.toString() }
         sort?.let { map["sort"] = it }
         fields?.let { map["fields"] = it }
-        keyword?.let { map["keyword"] = it }
+        keyword?.trim()?.takeIf { it.isNotEmpty() }?.let { map["keyword"] = it }
         brand?.let { map["brand"] = it }
         minPrice?.let { map["price[gte]"] = it.toString() }
         maxPrice?.let { map["price[lte]"] = it.toString() }

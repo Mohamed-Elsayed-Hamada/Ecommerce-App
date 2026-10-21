@@ -2,31 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true">
         <shape android:shape="oval">
-            <solid android:color="@color/primaryColor" />
+            <size android:width="8dp" android:height="8dp" />
+            <solid android:color="@color/colorPrimary" />
         </shape>
     </item>
 
-    <!-- Circle background when NOT SELECTED -->
     <item android:state_selected="false">
         <shape android:shape="oval">
-            <solid android:color="@color/white" />
+            <size android:width="8dp" android:height="8dp" />
+            <solid android:color="@color/colorSurfaceVariant" />
         </shape>
     </item>
-    <!-- Background when the tab is SELECTED (with rounded corners) -->
-<!--    <item android:state_selected="true">-->
-<!--        <shape android:shape="rectangle">-->
-<!--            <solid android:color="@color/primaryColor" />-->
-<!--            &lt;!&ndash; Adjust the radius value (e.g., 8dp) to change roundness &ndash;&gt;-->
-<!--            <corners android:radius="8dp" />-->
-<!--        </shape>-->
-<!--    </item>-->
-
-<!--    &lt;!&ndash; Background when the tab is NOT SELECTED &ndash;&gt;-->
-<!--    <item android:state_selected="false">-->
-<!--        <shape android:shape="rectangle">-->
-<!--            <solid android:color="@color/white" />-->
-<!--            <corners android:radius="8dp" />-->
-<!--        </shape>-->
-<!--    </item>-->
-
 </selector>

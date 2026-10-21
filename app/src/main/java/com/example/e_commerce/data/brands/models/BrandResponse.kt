@@ -27,12 +27,12 @@ data class Data(
 
 data class Metadata(
     @SerializedName("currentPage")
-    val currentPage: Int,
+    val currentPage: Int = 1,
     @SerializedName("limit")
-    val limit: Int,
+    val limit: Int = 0,
     @SerializedName("nextPage")
-    val nextPage: Int,
+    val nextPage: Int? = null,
     @SerializedName("numberOfPages")
-    val numberOfPages: Int
+    val numberOfPages: Int = 1
 )
 

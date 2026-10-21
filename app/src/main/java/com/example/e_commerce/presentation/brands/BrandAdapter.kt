@@ -2,49 +2,56 @@ package com.example.e_commerce.presentation.brands
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.e_commerce.databinding.CategoryItemBinding
 import com.example.e_commerce.domain.brands.Brand
-import com.example.e_commerce.domain.category.Category
-class BrandAdapter : RecyclerView.Adapter<BrandAdapter.BrandViewHolder>() {
-    var brandList = mutableListOf<Brand>()
+
+class BrandAdapter : ListAdapter<Brand, BrandAdapter.BrandViewHolder>(DiffCallback) {
+
     var onItemClick: ((String) -> Unit)? = null
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): BrandViewHolder {
-        val binding =
-            CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandViewHolder {
+        val binding = CategoryItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return BrandViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: BrandViewHolder,
-        position: Int
-    ) {
-        holder.bind(brandList[position])
+    override fun onBindViewHolder(holder: BrandViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return brandList.size
-    }
+    inner class BrandViewHolder(private val binding: CategoryItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    inner class BrandViewHolder : RecyclerView.ViewHolder {
-        lateinit var binding: CategoryItemBinding
-
-        constructor(binding: CategoryItemBinding) : super(binding.root) {
-            this.binding = binding
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick?.invoke(getItem(position).id)
+                }
+            }
         }
 
         fun bind(brand: Brand) {
             binding.tvCategoryName.text = brand.name
             Glide.with(binding.root.context)
                 .load(brand.image)
+                .fitCenter()
                 .into(binding.ivCategoryImage)
         }
-
     }
 
+    private companion object {
+        val DiffCallback = object : DiffUtil.ItemCallback<Brand>() {
+            override fun areItemsTheSame(oldItem: Brand, newItem: Brand) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Brand, newItem: Brand) = oldItem == newItem
+        }
+    }
 }

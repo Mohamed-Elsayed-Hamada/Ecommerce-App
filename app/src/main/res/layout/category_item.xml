@@ -3,55 +3,57 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:layout_width="180dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:strokeColor="#E0E0E0"
-    app:strokeWidth="1dp">
+    style="@style/Widget.ECommerce.Card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/radius_large"
+    app:cardElevation="@dimen/elevation_subtle"
+    app:rippleColor="@color/carouselButtonRipple"
+    app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivCategoryImage"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="0dp"
+            android:background="@color/inputBackgroundColor"
+            android:contentDescription="@string/desc_category_image"
             android:scaleType="centerCrop"
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <View
+            android:id="@+id/viewCategoryScrim"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/category_carousel_scrim_height"
+            android:background="@drawable/bg_category_scrim"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvCategoryName"
+            style="@style/TextAppearance.ECommerce.TitleLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-
+            android:layout_marginHorizontal="@dimen/space_lg"
+            android:layout_marginBottom="@dimen/space_lg"
             android:ellipsize="end"
             android:maxLines="2"
-
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-
-            app:layout_constraintTop_toBottomOf="@id/ivCategoryImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/carouselOnImage"
             app:layout_constraintBottom_toBottomOf="parent"
-
-            tools:text="Android Development" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Electronics" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/productsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    android:background="@color/colorBackground"
     tools:context=".presentation.products.ProductsFragment">
 
     <LinearLayout
@@ -14,25 +13,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Header -->
+        <!-- Top Header Bar -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp">
+            android:paddingHorizontal="@dimen/screen_padding"
+            android:paddingVertical="@dimen/space_sm">
 
             <!-- Back Button -->
-            <ImageView
+            <ImageButton
                 android:id="@+id/iv_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_circle_white"
-                android:contentDescription="Back"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
+                style="@style/Widget.ECommerce.IconButton.Circle"
                 android:src="@drawable/ic_arrow_back"
+                app:tint="@color/colorOnSurface"
+                android:contentDescription="@string/action_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,52 +34,40 @@
             <!-- Title -->
             <TextView
                 android:id="@+id/tv_title"
+                style="@style/TextAppearance.ECommerce.TitleMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginHorizontal="@dimen/space_md"
                 android:gravity="center"
-                android:text="Products"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:text="@string/title_products"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_filter"
                 app:layout_constraintStart_toEndOf="@id/iv_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Filter Button -->
-            <ImageView
+            <ImageButton
                 android:id="@+id/btn_filter"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_circle_white"
-                android:contentDescription="Filter products"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/filter"
+                style="@style/Widget.ECommerce.IconButton.Circle"
+                android:src="@drawable/ic_filter"
+                app:tint="@color/colorOnSurface"
+                android:contentDescription="@string/desc_filter_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <!-- Search -->
+        <!-- Search Bar -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/searchLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.ECommerce.TextInputLayout.Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:hint="Search products"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp"
+            android:layout_marginHorizontal="@dimen/screen_padding"
+            android:layout_marginTop="@dimen/space_xs"
+            android:layout_marginBottom="@dimen/space_sm"
+            android:hint="@string/search_products_hint"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/searchicon">
 
@@ -96,105 +78,117 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp" />
-
+                android:paddingVertical="@dimen/space_md"
+                android:textColor="@color/textPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <!-- Active Filter / Sort Row -->
         <LinearLayout
             android:id="@+id/filterSortContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginHorizontal="@dimen/screen_padding"
+            android:layout_marginBottom="@dimen/space_xs"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- Filter Text -->
+            <!-- Filter Status Text -->
             <TextView
                 android:id="@+id/tv_filter_status"
+                style="@style/TextAppearance.ECommerce.BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="All Products"
-                android:textColor="@color/gray"
-                android:textSize="14sp" />
+                android:text="@string/all_products" />
 
             <!-- Sort Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sort"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.ECommerce.Button.Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sort"
-                android:textAllCaps="false"
-                android:textSize="14sp"
-                app:icon="@drawable/sorting"
+                android:text="@string/action_sort"
+                app:icon="@drawable/ic_sort"
                 app:iconGravity="textStart"
-                app:iconPadding="6dp" />
+                app:iconPadding="@dimen/space_xs"
+                app:iconTint="@color/colorPrimary" />
 
         </LinearLayout>
 
-
-        <!-- Products RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_products"
+        <!-- FrameLayout for Products Grid & Empty State -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:itemCount="6"
-            tools:listitem="@layout/product_item" />
+            android:layout_weight="1">
 
+            <!-- Products RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_products"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/space_sm"
+                android:paddingTop="@dimen/space_xs"
+                android:paddingBottom="@dimen/space_md"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="6"
+                tools:listitem="@layout/product_item" />
+
+            <!-- Empty State -->
+            <include
+                android:id="@+id/layoutEmpty"
+                layout="@layout/view_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <!-- Error State -->
+            <include
+                android:id="@+id/layoutError"
+                layout="@layout/view_error_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
         <!-- Pagination Progress -->
         <ProgressBar
             android:id="@+id/paginationProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:indeterminateTint="@color/primaryColor"
+            android:layout_margin="@dimen/space_sm"
+            android:indeterminateTint="@color/colorPrimary"
             android:visibility="gone" />
 
-
-        <!-- Last Page -->
+        <!-- Last Page Text -->
         <TextView
             android:id="@+id/lastPage"
+            style="@style/TextAppearance.ECommerce.BodySmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
-            android:text="No more products to load"
-            android:textColor="@color/gray"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/screen_padding"
+            android:layout_marginTop="@dimen/space_xs"
+            android:layout_marginBottom="@dimen/space_md"
+            android:text="@string/no_more_products"
             android:visibility="gone" />
 
     </LinearLayout>
 
-
-    <!-- Initial Loading -->
+    <!-- Initial Loading Progress -->
     <ProgressBar
         android:id="@+id/initialProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/primaryColor"
+        android:indeterminateTint="@color/colorPrimary"
         android:visibility="gone" />
 
 </FrameLayout>

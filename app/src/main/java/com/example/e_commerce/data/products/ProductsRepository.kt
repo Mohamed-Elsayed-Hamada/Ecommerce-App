@@ -1,29 +1,33 @@
 package com.example.e_commerce.data.products
 
+import com.example.e_commerce.core.NetworkResult
+import com.example.e_commerce.core.toNetworkResult
 import com.example.e_commerce.data.products.models.ProductDataDetails
 import com.example.e_commerce.data.products.models.ProductsRequest
 import com.example.e_commerce.data.products.models.ProductsResponse
-import javax.inject.Inject // Changed from jakarta to javax
+import javax.inject.Inject
 
 class ProductsRepository @Inject constructor(private val apiService: ProductsApiService) {
 
     suspend fun getProducts(
         queries: ProductsRequest? = null,
         categories: List<String>? = null
-    ): ProductsResponse? {
-        val response = apiService.getProducts(queries?.toQueryMap() ?: mapOf(), categories)
-        if (response.isSuccessful) {
-            return response.body()
-        }
-        return null
-    }
+    ): NetworkResult<ProductsResponse> =
+        apiService.getProducts(queries?.toQueryMap() ?: emptyMap(), categories).toNetworkResult()
 
-    // Renamed for clarity to avoid confusion with the list fetcher
-    suspend fun getProductDetails(id: String): ProductDataDetails? {
-        val response = apiService.getProduct(id)
-        if (response.isSuccessful) {
-            return response.body()?.data
+    suspend fun getProductDetails(id: String): NetworkResult<ProductDataDetails> {
+        return when (val result = apiService.getProduct(id).toNetworkResult()) {
+            is NetworkResult.Success -> {
+                val details = result.data.data
+                if (details == null) {
+                    NetworkResult.HttpError(200, "Empty product response")
+                } else {
+                    NetworkResult.Success(details)
+                }
+            }
+
+            is NetworkResult.HttpError -> result
+            is NetworkResult.NetworkError -> result
         }
-        return null
     }
 }

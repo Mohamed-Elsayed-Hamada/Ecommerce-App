@@ -1,10 +1,167 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">المتجر</string>
+    <!-- App & Navigation -->
+    <string name="app_name">المتجر الإلكتروني</string>
     <string name="title_home">الرئيسية</string>
-    <string name="title_categories">الأقسام</string>
-    <string name="title_cart">السلة</string>
-    <string name="title_profile">حسابي</string>
+    <string name="title_cart">عربة التسوق</string>
     <string name="title_products">المنتجات</string>
+    <string name="title_wishlist">المفضلة</string>
+    <string name="title_reviews">التقييمات</string>
 
+    <!-- Splash & Auth Common -->
+    <string name="app_tagline">وجهتك الأولى للتسوق الإلكتروني</string>
+    <string name="welcome_back">مرحباً بعودتك</string>
+    <string name="sign_in_to_continue">تسجيل الدخول للمتابعة</string>
+    <string name="welcome_create_account">إنشاء حساب جديد</string>
+    <string name="sign_up_subtitle">سجل للحصول على تجربة مميزة</string>
+    <string name="email_hint">البريد الإلكتروني</string>
+    <string name="password_hint">كلمة المرور</string>
+    <string name="confirm_password_hint">تأكيد كلمة المرور</string>
+    <string name="name_hint">الاسم بالكامل</string>
+    <string name="phone_number_hint">رقم الهاتف</string>
+    <string name="action_login">تسجيل الدخول</string>
+    <string name="action_register">إنشاء حساب</string>
+    <string name="dont_have_account">ليس لديك حساب؟</string>
+    <string name="already_have_account">لديك حساب بالفعل؟</string>
+    <string name="register_link">سجل الآن</string>
+    <string name="sign_in_link">تسجيل الدخول</string>
+    <string name="error_fill_all_fields">يرجى ملء جميع الحقول</string>
+    <string name="error_passwords_dont_match">كلمات المرور غير متطابقة</string>
+    <string name="error_invalid_email">أدخل بريداً إلكترونياً صحيحاً</string>
+    <string name="error_invalid_phone">أدخل رقم هاتف صحيحاً</string>
+    <string name="error_check_fields">يرجى مراجعة الحقول المحددة</string>
+    <string name="error_network">تعذر الوصول إلى الخادم. تحقق من اتصالك وحاول مرة أخرى.</string>
+
+    <!-- Home Screen -->
+    <string name="search_hint">ابحث عن المنتجات، العلامات التجارية…</string>
+    <string name="section_categories">الأقسام</string>
+    <string name="section_brands">العلامات التجارية</string>
+    <string name="section_latest_products">أحدث المنتجات</string>
+    <string name="action_view_all">عرض الكل</string>
+
+    <!-- Products & Search -->
+    <string name="search_products_hint">البحث في المنتجات</string>
+    <string name="all_products">جميع المنتجات</string>
+    <string name="action_sort">ترتيب</string>
+    <string name="sort_products_title">ترتيب المنتجات</string>
+    <string name="sort_default">الافتراضي</string>
+    <string name="sort_price_low_high">السعر: من الأقل للأعلى</string>
+    <string name="sort_price_high_low">السعر: من الأعلى للأقل</string>
+    <string name="no_more_products">لا توجد منتجات أخرى</string>
+    <string name="filter_status_search">بحث: %1$s</string>
+    <string name="filter_status_brand">تصفية حسب العلامة التجارية</string>
+    <string name="filter_status_category">تصفية حسب القسم</string>
+    <string name="filter_status_price_range">%1$d–%2$d ج.م</string>
+    <string name="filter_status_price_from">من %1$d ج.م</string>
+    <string name="filter_status_price_up_to">حتى %1$d ج.م</string>
+
+    <!-- Filter Bottom Sheet -->
+    <string name="filter_title">تصفية المنتجات</string>
+    <string name="filter_price_range">نطاق السعر (ج.م)</string>
+    <string name="filter_min_price">أقل سعر</string>
+    <string name="filter_max_price">أعلى سعر</string>
+    <string name="action_clear">إعادة ضبط</string>
+    <string name="action_apply_filters">تطبيق الفلاتر</string>
+    <string name="error_min_greater_than_max">يجب أن يكون أقل سعر أقل من أعلى سعر</string>
+
+    <!-- Product Details -->
+    <string name="product_details_title">تفاصيل المنتج</string>
+    <string name="product_information">معلومات المنتج</string>
+    <string name="label_category">القسم: %1$s</string>
+    <string name="label_subcategory">القسم الفرعي: %1$s</string>
+    <string name="label_stock_available">المتوفر: %1$s</string>
+    <string name="quantity_label">الكمية</string>
+    <string name="quantity_value_format">%1$d</string>
+    <string name="action_add_to_cart">أضف إلى العربة</string>
+    <string name="section_reviews">التقييمات</string>
+    <string name="action_view_all_reviews">عرض جميع التقييمات</string>
+    <string name="section_similar_products">منتجات مشابهة</string>
+    <string name="rating_summary">بناءً على تقييمات العملاء</string>
+    <string name="price_format">%1$s ج.م</string>
+    <string name="not_available">غير متوفر</string>
+
+    <!-- Cart Screen -->
+    <string name="my_cart_title">عربة التسوق</string>
+    <string name="label_total">الإجمالي</string>
+    <string name="action_checkout">إتمام الشراء</string>
+    <string name="action_checkout_unavailable">إتمام الشراء قريباً</string>
+    <string name="cart_empty_title">عربة التسوق فارغة</string>
+    <string name="cart_empty_subtitle">لم تقم بإضافة أي منتجات حتى الآن</string>
+    <string name="action_browse_products">ابدأ التسوق</string>
+    <string name="item_removed_from_cart">تمت إزالة العنصر من العربة</string>
+    <string name="action_undo">تراجع</string>
+    <string name="item_added_to_cart">تمت الإضافة إلى العربة</string>
+    <string name="error_add_to_cart">تعذرت الإضافة إلى العربة. يرجى المحاولة مرة أخرى.</string>
+    <string name="error_cart_update">تعذر تحديث العربة. يرجى المحاولة مرة أخرى.</string>
+
+    <!-- Wishlist Screen -->
+    <string name="wishlist_empty_title">قائمة المفضلة فارغة</string>
+    <string name="wishlist_empty_subtitle">احفظ المنتجات التي تعجبك بالضغط على أيقونة القلب</string>
+    <string name="item_saved_to_wishlist">تمت الإضافة إلى المفضلة</string>
+    <string name="error_wishlist_update">تعذر تحديث المفضلة. يرجى المحاولة مرة أخرى.</string>
+
+    <!-- Empty & Error States -->
+    <string name="empty_products_title">لم يتم العثور على منتجات</string>
+    <string name="empty_products_subtitle">جرب تعديل كلمة البحث أو الفلاتر</string>
+    <string name="empty_reviews_title">لا توجد تقييمات حتى الآن</string>
+    <string name="empty_reviews_subtitle">كن أول من يقيم هذا المنتج</string>
+    <string name="error_loading_title">حدث خطأ ما</string>
+    <string name="error_loading_subtitle">تعذر تحميل البيانات. يرجى التحقق من اتصالك بالإنترنت.</string>
+    <string name="error_load_more">تعذر تحميل المزيد من المنتجات. مرر للمحاولة مرة أخرى.</string>
+    <string name="action_retry">إعادة المحاولة</string>
+
+    <!-- Plurals -->
+    <plurals name="password_min_length">
+        <item quantity="zero">يجب أن تكون كلمة المرور %1$d أحرف على الأقل</item>
+        <item quantity="one">يجب أن تكون كلمة المرور %1$d حرف على الأقل</item>
+        <item quantity="two">يجب أن تكون كلمة المرور %1$d حرفين على الأقل</item>
+        <item quantity="few">يجب أن تكون كلمة المرور %1$d أحرف على الأقل</item>
+        <item quantity="many">يجب أن تكون كلمة المرور %1$d حرفاً على الأقل</item>
+        <item quantity="other">يجب أن تكون كلمة المرور %1$d حرف على الأقل</item>
+    </plurals>
+    <plurals name="reviews_count">
+        <item quantity="zero">(%1$d تقييم)</item>
+        <item quantity="one">(%1$d تقييم)</item>
+        <item quantity="two">(%1$d تقييمان)</item>
+        <item quantity="few">(%1$d تقييمات)</item>
+        <item quantity="many">(%1$d تقييماً)</item>
+        <item quantity="other">(%1$d تقييم)</item>
+    </plurals>
+    <plurals name="ratings_count">
+        <item quantity="zero">%1$d تقييم</item>
+        <item quantity="one">%1$d تقييم</item>
+        <item quantity="two">%1$d تقييمان</item>
+        <item quantity="few">%1$d تقييمات</item>
+        <item quantity="many">%1$d تقييماً</item>
+        <item quantity="other">%1$d تقييم</item>
+    </plurals>
+    <plurals name="items_count">
+        <item quantity="zero">%1$d عنصر</item>
+        <item quantity="one">%1$d عنصر</item>
+        <item quantity="two">%1$d عنصران</item>
+        <item quantity="few">%1$d عناصر</item>
+        <item quantity="many">%1$d عنصراً</item>
+        <item quantity="other">%1$d عنصر</item>
+    </plurals>
+
+    <!-- Accessibility Descriptions -->
+    <string name="desc_app_logo">شعار التطبيق</string>
+    <string name="action_back">رجوع</string>
+    <string name="desc_logout">تسجيل الخروج</string>
+    <string name="desc_cart_icon">عربة التسوق</string>
+    <string name="desc_filter_icon">تصفية المنتجات</string>
+    <string name="desc_favorite_button">إضافة للمفضلة</string>
+    <string name="desc_add_to_cart">إضافة للعربة</string>
+    <string name="desc_decrease_quantity">تقليل الكمية</string>
+    <string name="desc_increase_quantity">زيادة الكمية</string>
+    <string name="desc_remove_item">إزالة العنصر من العربة</string>
+    <string name="desc_product_image">صورة المنتج</string>
+    <string name="desc_category_image">صورة القسم</string>
+    <string name="desc_category_image_named">صورة قسم %1$s</string>
+    <string name="desc_previous_category">القسم السابق</string>
+    <string name="desc_next_category">القسم التالي</string>
+    <string name="desc_brand_image">صورة العلامة التجارية</string>
+    <string name="desc_rating_star">نجمة التقييم</string>
+    <string name="desc_empty_state">حالة فارغة</string>
+    <string name="desc_error_state">خطأ</string>
+    <string name="avatar_fallback">م</string>
 </resources>

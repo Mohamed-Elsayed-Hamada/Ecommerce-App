@@ -3,15 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:layout_width="180dp"
+    style="@style/Widget.ECommerce.Card"
+    android:layout_width="@dimen/category_card_width"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:strokeColor="#E0E0E0"
-    app:strokeWidth="1dp">
+    android:layout_marginEnd="@dimen/space_md"
+    android:layout_marginVertical="@dimen/space_xs">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,38 +16,32 @@
         <ImageView
             android:id="@+id/ivCategoryImage"
             android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-
+            android:layout_height="@dimen/category_card_image_height"
+            android:scaleType="centerInside"
+            android:background="@color/inputBackgroundColor"
+            android:padding="@dimen/space_sm"
+            android:contentDescription="@string/desc_brand_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/tvCategoryName"
+            style="@style/TextAppearance.ECommerce.BodyMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-
+            android:layout_marginHorizontal="@dimen/space_sm"
+            android:layout_marginVertical="@dimen/space_sm"
+            android:gravity="center"
             android:ellipsize="end"
-            android:maxLines="2"
-
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:maxLines="1"
             android:textStyle="bold"
-
             app:layout_constraintTop_toBottomOf="@id/ivCategoryImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-
-            tools:text="Android Development" />
+            tools:text="DeFacto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

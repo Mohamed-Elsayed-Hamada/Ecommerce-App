@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing Scale (4dp grid) -->
+    <dimen name="space_xxs">2dp</dimen>
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_sm">8dp</dimen>
+    <dimen name="space_md">12dp</dimen>
+    <dimen name="space_lg">16dp</dimen>
+    <dimen name="space_xl">20dp</dimen>
+    <dimen name="space_xxl">24dp</dimen>
+    <dimen name="space_xxxl">32dp</dimen>
+    <dimen name="screen_padding">16dp</dimen>
+
+    <!-- Component Dimensions -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="button_height_small">44dp</dimen>
+    <dimen name="icon_button_size">48dp</dimen>
+    <dimen name="icon_button_size_small">48dp</dimen>
+    <dimen name="touch_target_min">48dp</dimen>
+    <dimen name="logo_size">140dp</dimen>
+    <dimen name="logo_size_splash">180dp</dimen>
+
+    <!-- Card & Item Sizing -->
+    <dimen name="product_card_image_height">150dp</dimen>
+    <dimen name="category_card_width">140dp</dimen>
+    <dimen name="category_card_image_height">100dp</dimen>
+    <dimen name="category_carousel_height">200dp</dimen>
+    <dimen name="category_carousel_scrim_height">96dp</dimen>
+    <dimen name="carousel_dot_size">6dp</dimen>
+    <dimen name="carousel_dot_width_selected">18dp</dimen>
+    <dimen name="carousel_dot_spacing">4dp</dimen>
+    <dimen name="carousel_dot_radius">3dp</dimen>
+    <dimen name="cart_item_image_size">96dp</dimen>
+    <dimen name="product_detail_image_height">280dp</dimen>
+
+    <!-- Corner Radii -->
+    <dimen name="radius_small">8dp</dimen>
+    <dimen name="radius_medium">12dp</dimen>
+    <dimen name="radius_large">16dp</dimen>
+    <dimen name="radius_pill">28dp</dimen>
+    <dimen name="card_stroke_width">1dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_subtle">1dp</dimen>
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_raised">4dp</dimen>
+    <dimen name="elevation_bottom_nav">8dp</dimen>
+
+    <!-- Typography Text Sizes -->
+    <dimen name="text_size_display">28sp</dimen>
+    <dimen name="text_size_title_large">24sp</dimen>
+    <dimen name="text_size_title_medium">20sp</dimen>
+    <dimen name="text_size_title_small">18sp</dimen>
+    <dimen name="text_size_body_large">16sp</dimen>
+    <dimen name="text_size_body_medium">15sp</dimen>
+    <dimen name="text_size_body_small">14sp</dimen>
+    <dimen name="text_size_price_large">24sp</dimen>
+    <dimen name="text_size_price_medium">18sp</dimen>
+</resources>
+

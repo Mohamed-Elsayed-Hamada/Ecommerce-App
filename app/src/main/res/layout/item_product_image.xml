@@ -7,4 +7,4 @@
     android:layout_height="match_parent"
     android:adjustViewBounds="true"
     android:scaleType="centerInside"
-    android:contentDescription="Product image" />
+    android:contentDescription="@string/desc_product_image" />

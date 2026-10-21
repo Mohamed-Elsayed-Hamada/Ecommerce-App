@@ -1,120 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:context="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="20dp"
-    context:name=".presentation.products.FilterBottomSheet">
+    android:padding="@dimen/screen_padding">
 
+    <!-- Drag Handle Indicator -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_xs"
+        android:layout_marginBottom="@dimen/space_md"
+        android:background="@drawable/bg_drag_handle" />
+
+    <!-- Sheet Title -->
     <TextView
+        style="@style/TextAppearance.ECommerce.TitleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Filter Products"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="@dimen/space_lg"
+        android:text="@string/filter_title" />
 
-    <!-- Minimum Price -->
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Minimum Price"
-        android:layout_marginBottom="12dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_min_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLines="1"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <!-- Maximum Price -->
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Maximum Price"
-        android:layout_marginBottom="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_max_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLines="1"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <!-- Brand -->
-
+    <!-- Price Range Heading -->
     <TextView
+        style="@style/TextAppearance.ECommerce.TitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Brand"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="@dimen/space_sm"
+        android:text="@string/filter_price_range" />
 
-    <Spinner
-        android:id="@+id/spinner_brand"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"/>
-
-
-    <!-- Category -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="24dp"/>
-
-
-    <!-- Buttons -->
-
+    <!-- Price Range Inputs -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!-- Minimum Price -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_min_price"
+            style="@style/Widget.ECommerce.TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/space_xs"
+            android:hint="@string/filter_min_price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_min_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/textPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Maximum Price -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_max_price"
+            style="@style/Widget.ECommerce.TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/space_xs"
+            android:hint="@string/filter_max_price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_max_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/textPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xxl"
+        android:layout_marginBottom="@dimen/space_md"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_clear"
+            style="@style/Widget.ECommerce.Button.Outlined"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height_small"
             android:layout_weight="1"
-            android:text="Clear"
-            android:textAllCaps="false"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-
-        <Space
-            android:layout_width="12dp"
-            android:layout_height="1dp"/>
+            android:layout_marginEnd="@dimen/space_xs"
+            android:text="@string/action_clear" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_apply"
+            style="@style/Widget.ECommerce.Button.Primary"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height_small"
             android:layout_weight="1"
-            android:text="Apply Filters"
-            android:textAllCaps="false"/>
+            android:layout_marginStart="@dimen/space_xs"
+            android:text="@string/action_apply_filters" />
 
     </LinearLayout>
 

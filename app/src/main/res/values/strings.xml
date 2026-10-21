@@ -1,11 +1,151 @@
 <resources>
+    <!-- App & Navigation -->
     <string name="app_name">E-Commerce</string>
     <string name="title_home">Home</string>
-    <string name="title_categories">Categories</string>
     <string name="title_cart">Cart</string>
-    <string name="title_profile">Profile</string>
     <string name="title_products">Products</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_wishlist">Wishlist</string>
+    <string name="title_reviews">Reviews</string>
+
+    <!-- Splash & Auth Common -->
+    <string name="app_tagline">Your one-stop shopping destination</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="welcome_create_account">Create an Account</string>
+    <string name="sign_up_subtitle">Sign up to get started</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="name_hint">Full Name</string>
+    <string name="phone_number_hint">Phone Number</string>
+    <string name="action_login">Sign In</string>
+    <string name="action_register">Sign Up</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="register_link">Sign Up</string>
+    <string name="sign_in_link">Sign In</string>
+    <string name="error_fill_all_fields">Please fill all fields</string>
+    <string name="error_passwords_dont_match">Passwords do not match</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_invalid_phone">Enter a valid phone number</string>
+    <string name="error_check_fields">Please check the highlighted fields</string>
+    <string name="error_network">Could not reach the server. Check your connection and try again.</string>
+
+    <!-- Home Screen -->
+    <string name="search_hint">Search products, brands…</string>
+    <string name="section_categories">Categories</string>
+    <string name="section_brands">Brands</string>
+    <string name="section_latest_products">Latest Products</string>
+    <string name="action_view_all">View All</string>
+
+    <!-- Products & Search -->
+    <string name="search_products_hint">Search products</string>
+    <string name="all_products">All Products</string>
+    <string name="action_sort">Sort</string>
+    <string name="sort_products_title">Sort Products</string>
+    <string name="sort_default">Default</string>
+    <string name="sort_price_low_high">Price: Low to High</string>
+    <string name="sort_price_high_low">Price: High to Low</string>
+    <string name="no_more_products">No more products to load</string>
+    <string name="filter_status_search">Search: %1$s</string>
+    <string name="filter_status_brand">Brand filter</string>
+    <string name="filter_status_category">Category filter</string>
+    <string name="filter_status_price_range">EGP %1$d–%2$d</string>
+    <string name="filter_status_price_from">From EGP %1$d</string>
+    <string name="filter_status_price_up_to">Up to EGP %1$d</string>
+
+    <!-- Filter Bottom Sheet -->
+    <string name="filter_title">Filter Products</string>
+    <string name="filter_price_range">Price Range (EGP)</string>
+    <string name="filter_min_price">Minimum Price</string>
+    <string name="filter_max_price">Maximum Price</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_apply_filters">Apply Filters</string>
+    <string name="error_min_greater_than_max">Minimum price must be lower than maximum</string>
+
+    <!-- Product Details -->
+    <string name="product_details_title">Product Details</string>
+    <string name="product_information">Product Information</string>
+    <string name="label_category">Category: %1$s</string>
+    <string name="label_subcategory">Subcategory: %1$s</string>
+    <string name="label_stock_available">Available: %1$s</string>
+    <string name="quantity_label">Quantity</string>
+    <string name="quantity_value_format">%1$d</string>
+    <string name="action_add_to_cart">Add to Cart</string>
+    <string name="section_reviews">Reviews</string>
+    <string name="action_view_all_reviews">View All Reviews</string>
+    <string name="section_similar_products">Similar Products</string>
+    <string name="rating_summary">Based on customer ratings</string>
+    <string name="price_format">%1$s EGP</string>
+    <string name="not_available">N/A</string>
+
+    <!-- Cart Screen -->
+    <string name="my_cart_title">My Cart</string>
+    <string name="label_total">Total</string>
+    <string name="action_checkout">Proceed to Checkout</string>
+    <string name="action_checkout_unavailable">Checkout coming soon</string>
+    <string name="cart_empty_title">Your cart is empty</string>
+    <string name="cart_empty_subtitle">Looks like you haven\'t added anything yet</string>
+    <string name="action_browse_products">Start Shopping</string>
+    <string name="item_removed_from_cart">Item removed from cart</string>
+    <string name="action_undo">Undo</string>
+    <string name="item_added_to_cart">Added to cart</string>
+    <string name="error_add_to_cart">Couldn\'t add to cart. Please try again.</string>
+    <string name="error_cart_update">Couldn\'t update your cart. Please try again.</string>
+
+    <!-- Wishlist Screen -->
+    <string name="wishlist_empty_title">Your wishlist is empty</string>
+    <string name="wishlist_empty_subtitle">Save items you love by tapping the heart icon</string>
+    <string name="item_saved_to_wishlist">Saved to wishlist</string>
+    <string name="error_wishlist_update">Couldn\'t update your wishlist. Please try again.</string>
+
+    <!-- Empty & Error States -->
+    <string name="empty_products_title">No products found</string>
+    <string name="empty_products_subtitle">Try adjusting your search or filters</string>
+    <string name="empty_reviews_title">No reviews yet</string>
+    <string name="empty_reviews_subtitle">Be the first to review this product</string>
+    <string name="error_loading_title">Something went wrong</string>
+    <string name="error_loading_subtitle">Could not load data. Please check your connection.</string>
+    <string name="error_load_more">Couldn\'t load more products. Scroll to retry.</string>
+    <string name="action_retry">Try Again</string>
+
+    <!-- Plurals -->
+    <plurals name="password_min_length">
+        <item quantity="one">Password must be at least %1$d character</item>
+        <item quantity="other">Password must be at least %1$d characters</item>
+    </plurals>
+    <plurals name="reviews_count">
+        <item quantity="one">(%1$d review)</item>
+        <item quantity="other">(%1$d reviews)</item>
+    </plurals>
+    <plurals name="ratings_count">
+        <item quantity="one">%1$d rating</item>
+        <item quantity="other">%1$d ratings</item>
+    </plurals>
+    <plurals name="items_count">
+        <item quantity="one">%1$d item</item>
+        <item quantity="other">%1$d items</item>
+    </plurals>
+
+    <!-- Accessibility Descriptions -->
+    <string name="desc_app_logo">E-Commerce Application Logo</string>
+    <string name="action_back">Go back</string>
+    <string name="desc_logout">Sign out</string>
+    <string name="desc_cart_icon">Shopping Cart</string>
+    <string name="desc_filter_icon">Filter products</string>
+    <string name="desc_favorite_button">Add to wishlist</string>
+    <string name="desc_add_to_cart">Add item to cart</string>
+    <string name="desc_decrease_quantity">Decrease quantity</string>
+    <string name="desc_increase_quantity">Increase quantity</string>
+    <string name="desc_remove_item">Remove item from cart</string>
+    <string name="desc_product_image">Product image</string>
+    <string name="desc_category_image">Category image</string>
+    <string name="desc_category_image_named">%1$s category image</string>
+    <string name="desc_previous_category">Previous category</string>
+    <string name="desc_next_category">Next category</string>
+    <string name="desc_brand_image">Brand image</string>
+    <string name="desc_rating_star">Rating star</string>
+    <string name="desc_empty_state">Empty state</string>
+    <string name="desc_error_state">Error</string>
+    <string name="avatar_fallback">U</string>
 </resources>

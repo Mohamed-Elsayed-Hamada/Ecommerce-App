@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- Color when the tab is selected -->
-    <item android:color="@color/primaryColor" android:state_selected="true" />
-
-    <!-- Color when the tab is NOT selected -->
-    <item android:color="@android:color/black" android:state_selected="false" />
-</selector>

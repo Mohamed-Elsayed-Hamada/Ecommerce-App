@@ -3,7 +3,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductDetailsResponse(
     @SerializedName("data")
-    val data: ProductDataDetails
+    val data: ProductDataDetails? = null
 )
 
 data class ProductDataDetails(

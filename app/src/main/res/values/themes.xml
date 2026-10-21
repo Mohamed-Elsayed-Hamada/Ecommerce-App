@@ -1,12 +1,191 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ECommerce" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="android:windowBackground">@color/backgroundColor</item>
-        <item name="android:textColor">@color/textColor</item>
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainer</item>
+
+        <!-- Surfaces & Backgrounds -->
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
+
+        <!-- Status & System Bars -->
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+
+        <!-- Semantics -->
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="colorErrorContainer">@color/colorErrorContainer</item>
+        <item name="colorOnErrorContainer">@color/colorOnErrorContainer</item>
+        <item name="colorOutline">@color/colorOutline</item>
+        <item name="colorOutlineVariant">@color/colorOutlineVariant</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+
+        <!-- Component Theme Defaults -->
+        <item name="materialButtonStyle">@style/Widget.ECommerce.Button.Primary</item>
+        <item name="textInputStyle">@style/Widget.ECommerce.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.ECommerce.Card</item>
+        <item name="bottomSheetDialogTheme">@style/Widget.ECommerce.BottomSheet</item>
     </style>
 
     <style name="Theme.ECommerce" parent="Base.Theme.ECommerce" />
+
+    <!-- Button Styles -->
+    <style name="Widget.ECommerce.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="cornerRadius">@dimen/radius_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.ECommerce.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="cornerRadius">@dimen/radius_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="strokeWidth">@dimen/card_stroke_width</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.ECommerce.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/text_size_body_small</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- TextInputLayout Styles -->
+    <style name="Widget.ECommerce.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_medium</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidth">1.5dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+    </style>
+
+    <style name="Widget.ECommerce.TextInputLayout.Search" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_pill</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_pill</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_pill</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_pill</item>
+        <item name="boxBackgroundColor">@color/inputBackgroundColor</item>
+        <item name="boxStrokeColor">@color/cardStrokeColor</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1.5dp</item>
+        <item name="startIconTint">@color/colorOnSurfaceVariant</item>
+        <item name="hintTextColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- Card Styles -->
+    <style name="Widget.ECommerce.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="strokeColor">@color/cardStrokeColor</item>
+        <item name="strokeWidth">@dimen/card_stroke_width</item>
+        <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
+    </style>
+
+    <style name="Widget.ECommerce.Card.Product" parent="Widget.ECommerce.Card">
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="strokeColor">@color/cardStrokeColor</item>
+        <item name="strokeWidth">@dimen/card_stroke_width</item>
+    </style>
+
+    <!-- Bottom Sheet Dialog Style -->
+    <style name="Widget.ECommerce.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="shapeAppearance">@style/ShapeAppearance.ECommerce.BottomSheet</item>
+        <item name="backgroundTint">@color/colorSurface</item>
+    </style>
+
+    <style name="ShapeAppearance.ECommerce.BottomSheet" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSizeTopLeft">@dimen/radius_large</item>
+        <item name="cornerSizeTopRight">@dimen/radius_large</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- Circular Icon Button Style -->
+    <style name="Widget.ECommerce.IconButton" parent="">
+        <item name="android:layout_width">@dimen/icon_button_size</item>
+        <item name="android:layout_height">@dimen/icon_button_size</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:padding">@dimen/space_sm</item>
+    </style>
+
+    <style name="Widget.ECommerce.IconButton.Circle" parent="Widget.ECommerce.IconButton">
+        <item name="android:background">@drawable/bg_circle_button</item>
+        <item name="android:contentDescription">@string/action_back</item>
+    </style>
+
+    <!-- Typography Styles -->
+    <style name="TextAppearance.ECommerce.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_size_title_large</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_size_title_medium</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/text_size_title_small</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_size_body_large</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_size_body_medium</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_size_body_small</item>
+        <item name="android:textColor">@color/textTertiary</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.Price" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_size_price_medium</item>
+        <item name="android:textColor">@color/textPrice</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ECommerce.Price.Large">
+        <item name="android:textSize">@dimen/text_size_price_large</item>
+        <item name="android:textColor">@color/textPrice</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

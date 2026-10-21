@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        windowLightNavigationBar was added in API 27. Keeping it in the base
+        theme makes lint fail against minSdk 24, so it is applied only from v27.
+    -->
+    <style name="Theme.ECommerce" parent="Base.Theme.ECommerce">
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

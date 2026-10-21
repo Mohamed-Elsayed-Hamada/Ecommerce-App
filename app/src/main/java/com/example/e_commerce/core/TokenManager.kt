@@ -9,7 +9,7 @@ import javax.inject.Singleton
 class TokenManager @Inject constructor(
     @ApplicationContext
     context: Context
-) {
+) : TokenStore {
 
     private val pref =
         context.getSharedPreferences(
@@ -17,24 +17,15 @@ class TokenManager @Inject constructor(
             Context.MODE_PRIVATE
         )
 
-    fun saveToken(token: String) {
-
+    override fun saveToken(token: String) {
         pref.edit()
             .putString("TOKEN", token)
             .apply()
-
     }
 
-    fun getToken(): String? {
+    override fun getToken(): String? = pref.getString("TOKEN", null)
 
-        return pref.getString("TOKEN", null)
-
-    }
-
-    fun clearToken() {
-
+    override fun clearToken() {
         pref.edit().clear().apply()
-
     }
-
 }

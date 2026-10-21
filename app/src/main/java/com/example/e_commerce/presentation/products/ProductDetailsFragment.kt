@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.e_commerce.R
+import com.example.e_commerce.core.util.formatMoney
+import com.example.e_commerce.core.util.formatRating
+import com.example.e_commerce.core.util.navigateSafely
 import com.example.e_commerce.databinding.FragmentProductDetailsBinding
-import com.example.e_commerce.domain.products.models.Review
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,194 +26,204 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var similarProductsAdapter: ProductAdapter
     private lateinit var productImageAdapter: ProductImageAdapter
     private lateinit var reviewsAdapter: ReviewAdapter
+    private var imageMediator: TabLayoutMediator? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProductDetailsBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-
+        _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productId =
-            ProductDetailsFragmentArgs
-                .fromBundle(requireArguments())
-                .id
-
+        val productId = ProductDetailsFragmentArgs.fromBundle(requireArguments()).id
         viewModel.productId = productId
-        similarProductsAdapter = ProductAdapter()
-        binding.recyclerSimilarProducts.adapter = similarProductsAdapter
-        similarProductsAdapter.onItemClick = { id ->
-            val action =
-                ProductDetailsFragmentDirections
-                    .actionProductDetailsFragmentSelf(id)
-            findNavController().navigate(action)
-        }
-        reviewsAdapter = ReviewAdapter()
-        binding.recyclerReviews.adapter = reviewsAdapter
-        productImageAdapter = ProductImageAdapter()
 
+        setupAdapters()
         setupClicks()
         setupObservers()
 
         viewModel.fetchData()
     }
-    private fun setUpslider( images : List<String>) {
-        productImageAdapter.submitList(images)
-        binding.productImageSlider.adapter = productImageAdapter
 
+    private fun setupAdapters() {
+        similarProductsAdapter = ProductAdapter()
+        binding.recyclerSimilarProducts.adapter = similarProductsAdapter
+        similarProductsAdapter.onItemClick = { id ->
+            navigateSafely(
+                ProductDetailsFragmentDirections.actionProductDetailsFragmentSelf(id),
+                R.id.productDetailsFragment
+            )
+        }
+        similarProductsAdapter.onItemAddToCartClick = { id ->
+            viewModel.addProductToCart(id)
+        }
+        similarProductsAdapter.onItemFavoriteClick = { product ->
+            viewModel.addToWishlist(product.id)
+        }
+
+        reviewsAdapter = ReviewAdapter()
+        binding.recyclerReviews.adapter = reviewsAdapter
+
+        productImageAdapter = ProductImageAdapter()
+        binding.productImageSlider.adapter = productImageAdapter
         binding.productImageSlider.orientation =
             androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
     }
+
+    private fun setupImageIndicator() {
+        imageMediator?.detach()
+        imageMediator = TabLayoutMediator(binding.imageIndicator, binding.productImageSlider) { tab, _ ->
+            tab.text = null
+        }.also { it.attach() }
+    }
+
     private fun setupObservers() {
-        viewModel.productCount.observe(viewLifecycleOwner){
-            binding.tvQuantity.text = it.toString()
+        viewModel.similarProducts.observe(viewLifecycleOwner) {
+            similarProductsAdapter.submitList(it)
         }
-        viewModel.similarProducts.observe(viewLifecycleOwner){
-            similarProductsAdapter.updateData(it)
+
+        viewModel.reviews.observe(viewLifecycleOwner) { reviews ->
+            binding.btnViewAllReviews.visibility =
+                if (reviews.size > 2) View.VISIBLE else View.GONE
         }
-        viewModel.reviews.observe(viewLifecycleOwner){
-            if (it.count() >2)
-                binding.btnViewAllReviews.visibility = View.VISIBLE
+
+        viewModel.quantity.observe(viewLifecycleOwner) { quantity ->
+            binding.tvQuantity.text = getString(R.string.quantity_value_format, quantity)
+            updateStepperButtons()
         }
+
+        viewModel.cartLine.observe(viewLifecycleOwner) { line ->
+            binding.btnAddToCart.isEnabled =
+                !line.isPending && viewModel.isLoading.value != true
+            updateStepperButtons()
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.btnAddToCart.isEnabled =
+                !isLoading && viewModel.cartLine.value?.isPending != true
+            updateStepperButtons()
+        }
+
+        viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
+            binding.btnFavorite.setImageResource(
+                if (isFavorite) R.drawable.ic_favorite_filled else R.drawable.ic_favorite_border
+            )
+        }
+
+        viewModel.message.observe(viewLifecycleOwner) { messageRes ->
+            Snackbar.make(binding.root, messageRes, Snackbar.LENGTH_SHORT).show()
+        }
+
+        viewModel.isError.observe(viewLifecycleOwner) { isError ->
+            if (isError) {
+                Snackbar.make(binding.root, R.string.error_loading_title, Snackbar.LENGTH_LONG).show()
+                viewModel.consumeError()
+            }
+        }
+
         viewModel.product.observe(viewLifecycleOwner) { product ->
-
-            // Basic information
+            val context = requireContext()
             binding.tvProductTitle.text = product.title
-
             binding.tvBrand.text = product.brand.name
+            binding.tvPrice.text = formatMoney(context, product.price)
+            binding.tvDescription.text = product.description
 
-            binding.tvPrice.text =
-                "${product.price} EGP"
+            binding.tvRating.text = formatRating(product.rating)
+            binding.tvReviewsCount.text = resources.getQuantityString(
+                R.plurals.reviews_count,
+                product.ratingsQuantity,
+                product.ratingsQuantity
+            )
 
-            binding.tvDescription.text =
-                product.description
+            binding.tvCategory.text = getString(R.string.label_category, product.category.name)
+            binding.tvSubCategory.text = getString(
+                R.string.label_subcategory,
+                product.subcategory.firstOrNull()?.name ?: getString(R.string.not_available)
+            )
+            binding.tvStock.text = getString(
+                R.string.label_stock_available,
+                product.quantity.toString()
+            )
 
+            binding.tvReviewsRating.text = formatRating(product.rating)
+            binding.tvRatingsQuantity.text = resources.getQuantityString(
+                R.plurals.ratings_count,
+                product.ratingsQuantity,
+                product.ratingsQuantity
+            )
 
-            // Rating
-            binding.tvRating.text =
-                "⭐ ${product.rating}"
-
-            binding.tvReviewsCount.text =
-                "(${product.ratingsQuantity} reviews)"
-
-
-            // Product information
-            binding.tvCategory.text =
-                "Category: ${product.category.name}"
-
-            binding.tvSubCategory.text =
-                "Subcategory: ${product.subcategory.firstOrNull()?.name ?: "N/A"}"
-
-            binding.tvStock.text =
-                "Available: ${product.quantity}"
-
-
-            // Reviews summary
-            binding.tvReviewsRating.text =
-                product.rating.toString()
-
-            binding.tvRatingsQuantity.text =
-                "${product.ratingsQuantity} ratings"
-
-
-            // Quantity
-            binding.tvQuantity.text = "1"
+            bindRatingStars(product.rating)
 
             reviewsAdapter.submitList(product.reviews)
-            setUpslider(product.images)
+            productImageAdapter.submitList(product.images)
             setupImageIndicator()
-            // TODO:
-            // Setup image slider
-            // Setup reviews RecyclerView
-            // Setup similar products RecyclerView
         }
     }
-    private fun setupImageIndicator() {
 
-        TabLayoutMediator(
-            binding.imageIndicator,
-            binding.productImageSlider
-        ) { tab, _ ->
-            tab.text = "•"
-        }.attach()
+    private fun bindRatingStars(rating: Double) {
+        val stars = listOf(
+            binding.star1,
+            binding.star2,
+            binding.star3,
+            binding.star4,
+            binding.star5
+        )
+        stars.forEachIndexed { index, star ->
+            val fill = (rating - index).coerceIn(0.0, 1.0).toFloat()
+            star.alpha = fill
+        }
     }
 
     private fun setupClicks() {
         binding.btnViewAllReviews.setOnClickListener {
-
-            val reviewsJson = Gson().toJson(
-                viewModel.reviews.value ?: emptyList<Review>()
+            navigateSafely(
+                ProductDetailsFragmentDirections.actionProductDetailsFragmentToReviewsFragment(
+                    viewModel.productId
+                ),
+                R.id.productDetailsFragment
             )
-
-            val action =
-                ProductDetailsFragmentDirections
-                    .actionProductDetailsFragmentToReviewsFragment(
-                        reviewsJson
-                    )
-
-            findNavController().navigate(action)
         }
+
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
         binding.btnFavorite.setOnClickListener {
-            // TODO: Add/remove product from wishlist
+            viewModel.toggleFavorite()
         }
 
         binding.btnDecrease.setOnClickListener {
-            decreaseQuantity()
+            val current = viewModel.quantity.value ?: 1
+            viewModel.setQuantity(current - 1)
         }
 
         binding.btnIncrease.setOnClickListener {
-            increaseQuantity()
+            val current = viewModel.quantity.value ?: 1
+            viewModel.setQuantity(current + 1)
         }
 
         binding.btnAddToCart.setOnClickListener {
-           val count = binding.tvQuantity.text.toString().toInt()
-            viewModel.addToCart(viewModel.productId, count)
+            val count = viewModel.quantity.value ?: 1
+            viewModel.setCartCount(count)
         }
     }
 
-    private fun decreaseQuantity() {
-
-        val currentQuantity =
-            binding.tvQuantity.text
-                .toString()
-                .toInt()
-
-        if (currentQuantity > 1) {
-            binding.tvQuantity.text =
-                (currentQuantity - 1).toString()
-        }
-    }
-
-    private fun increaseQuantity() {
-
-        val currentQuantity =
-            binding.tvQuantity.text
-                .toString()
-                .toInt()
-
-        val maxQuantity =
-            viewModel.product.value?.quantity ?: 1
-
-        if (currentQuantity < maxQuantity) {
-            binding.tvQuantity.text =
-                (currentQuantity + 1).toString()
-        }
+    private fun updateStepperButtons() {
+        val quantity = viewModel.quantity.value ?: 1
+        val isPending = viewModel.cartLine.value?.isPending == true ||
+            viewModel.isLoading.value == true
+        binding.btnDecrease.isEnabled = !isPending && quantity > 1
+        binding.btnIncrease.isEnabled = !isPending && quantity < viewModel.maxQuantityForStepper()
     }
 
     override fun onDestroyView() {
+        imageMediator?.detach()
+        imageMediator = null
         super.onDestroyView()
         _binding = null
     }

@@ -1,9 +1,11 @@
 package com.example.e_commerce.core.di
 
-import com.example.e_commerce.core.TokenManager
+import com.example.e_commerce.core.SessionManager
+import com.example.e_commerce.core.TokenStore
 import com.example.e_commerce.data.auth.AuthApiService
 import com.example.e_commerce.data.brands.BrandApiService
 import com.example.e_commerce.data.cart_wishlist.CartApiService
+import com.example.e_commerce.data.cart_wishlist.WishlistApiService
 import com.example.e_commerce.data.category.CategoryApiService
 import com.example.e_commerce.data.products.ProductsApiService
 import dagger.Module
@@ -14,7 +16,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -45,19 +46,24 @@ object MyModule {
     @Singleton
     @AuthRetrofit
     fun provideAuthRetrofit(
-        tokenManager: TokenManager
+        tokenStore: TokenStore,
+        sessionManager: SessionManager
     ): Retrofit {
 
         val authInterceptor = Interceptor { chain ->
 
-            val token = tokenManager.getToken() ?: ""
+            val token = tokenStore.getToken() ?: ""
 
             val request = chain.request()
                 .newBuilder()
                 .addHeader("token", token)
                 .build()
 
-            chain.proceed(request)
+            val response = chain.proceed(request)
+            if (response.code == 401) {
+                sessionManager.onUnauthorized()
+            }
+            response
         }
 
         val client = OkHttpClient.Builder()
@@ -114,6 +120,14 @@ object MyModule {
         @AuthRetrofit retrofit: Retrofit
     ): CartApiService {
         return retrofit.create(CartApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWishlistApiService(
+        @AuthRetrofit retrofit: Retrofit
+    ): WishlistApiService {
+        return retrofit.create(WishlistApiService::class.java)
     }
 
 }

@@ -8,27 +8,12 @@
         android:id="@+id/productsFragment"
         android:icon="@drawable/searchicon"
         android:title="@string/title_products" />
-
-    <!-- Future items when you uncomment them -->
-    <!-- <item android:icon="@drawable/ic_cart" ... /> -->
-    <!-- <item android:icon="@drawable/ic_person" ... /> -->
+    <item
+        android:id="@+id/wishlistFragment"
+        android:icon="@drawable/ic_favorite_border"
+        android:title="@string/title_wishlist" />
+    <item
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/cart_icon"
+        android:title="@string/title_cart" />
 </menu>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<menu xmlns:android="http://schemas.android.com/apk/res/android">-->
-<!--    <item-->
-<!--        android:id="@+id/homeFragment"-->
-<!--        android:icon="@android:drawable/ic_menu_compass"-->
-<!--        android:title="@string/title_home" />-->
-<!--    <item-->
-<!--        android:id="@+id/productsFragment"-->
-<!--        android:icon="@android:drawable/ic_menu_sort_by_size"-->
-<!--        android:title="@string/title_categories" />-->
-<!--&lt;!&ndash;    <item&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/cartFragment"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:icon="@drawable/group"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:title="@string/title_cart" />&ndash;&gt;-->
-<!--&lt;!&ndash;    <item&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/profileFragment"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:icon="@android:drawable/ic_menu_myplaces"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:title="@string/title_profile" />&ndash;&gt;-->
-<!--</menu>-->

@@ -3,95 +3,97 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
+    style="@style/Widget.ECommerce.Card.Product"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:strokeColor="#E0E0E0"
-    app:strokeWidth="1dp">
+    android:layout_margin="@dimen/space_xs">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="12dp">
+        android:paddingBottom="@dimen/space_md">
 
-        <!-- Product Image (Maps to imageCover) -->
+        <!-- Product Image -->
         <ImageView
             android:id="@+id/ivProductImage"
             android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:scaleType="fitXY"
+            android:layout_height="@dimen/product_card_image_height"
+            android:scaleType="centerCrop"
+            android:background="@color/inputBackgroundColor"
+            android:contentDescription="@string/desc_product_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <!-- Favorite / Wishlist Button -->
+        <!-- Favorite Button -->
         <ImageView
             android:id="@+id/ivFavorite"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:padding="6dp"
+            android:layout_width="@dimen/icon_button_size_small"
+            android:layout_height="@dimen/icon_button_size_small"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginEnd="@dimen/space_sm"
+            android:padding="8dp"
+            android:background="@drawable/bg_favorite_circle"
+            android:contentDescription="@string/desc_favorite_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/btn_star"
-            app:tint="@color/black" />
+            app:srcCompat="@drawable/ic_favorite_border"
+            app:tint="@color/colorPrimary" />
 
         <!-- Product Title -->
         <TextView
             android:id="@+id/tvProductTitle"
+            style="@style/TextAppearance.ECommerce.BodyLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginStart="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginEnd="@dimen/space_md"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:minLines="2"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivProductImage"
-            tools:text="Smartphone E-commerce Display" />
+            tools:text="Modern Wireless Headphones" />
 
         <!-- Product Price -->
         <TextView
             android:id="@+id/tvProductPrice"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.ECommerce.Price"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
-            android:textColor="#3F51B5"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginStart="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_xs"
+            android:layout_marginEnd="@dimen/space_xs"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddCart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvProductTitle"
-            tools:text="$ 499.00" />
+            tools:text="499 EGP" />
 
         <!-- Rating Star Icon -->
         <ImageView
             android:id="@+id/ivStar"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_sm"
+            android:contentDescription="@string/desc_rating_star"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvProductPrice"
-            app:srcCompat="@android:drawable/star_on"
-            app:tint="#FFC107" />
+            app:srcCompat="@drawable/ic_star_filled"
+            app:tint="@color/ratingStarColor" />
 
-        <!-- Rating Value (Maps to ratingsAverage) -->
+        <!-- Rating Value -->
         <TextView
             android:id="@+id/tvProductRating"
+            style="@style/TextAppearance.ECommerce.BodySmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textColor="#757575"
-            android:textSize="14sp"
+            android:layout_marginStart="@dimen/space_xs"
+            android:textColor="@color/textSecondary"
             app:layout_constraintBottom_toBottomOf="@id/ivStar"
             app:layout_constraintStart_toEndOf="@id/ivStar"
             app:layout_constraintTop_toTopOf="@id/ivStar"
@@ -100,19 +102,18 @@
         <!-- Add to Cart Button -->
         <ImageView
             android:id="@+id/btnAddCart"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="12dp"
+            android:layout_width="@dimen/icon_button_size_small"
+            android:layout_height="@dimen/icon_button_size_small"
+            android:layout_marginEnd="@dimen/space_md"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground"
-            android:backgroundTint="#3F51B5"
+            android:background="@drawable/bg_add_to_cart"
             android:padding="8dp"
+            android:contentDescription="@string/desc_add_to_cart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add"
-            app:tint="@android:color/black" />
-
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/colorOnPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

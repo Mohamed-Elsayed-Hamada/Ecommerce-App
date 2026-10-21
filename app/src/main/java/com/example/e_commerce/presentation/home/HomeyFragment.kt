@@ -1,15 +1,14 @@
 package com.example.e_commerce.presentation.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_commerce.R
 import com.example.e_commerce.databinding.FragmentHomeyBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeyFragment : Fragment() {
 
@@ -26,7 +25,6 @@ class HomeyFragment : Fragment() {
             container,
             false
         )
-
         return binding.root
     }
 
@@ -36,22 +34,21 @@ class HomeyFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navHostFragment =
-            childFragmentManager.findFragmentById(
-                R.id.nav_host_fragment
-            ) as NavHostFragment
+        val navHostFragment = childFragmentManager.findFragmentById(
+            R.id.nav_host_fragment
+        ) as NavHostFragment
 
         val navController = navHostFragment.navController
 
-        binding.bottomNavigation.setupWithNavController(
-            navController
-        )
+        binding.bottomNavigation.setupWithNavController(navController)
+
         val bottomNav = binding.bottomNavigation
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-//                R.id.splashFragment -> bottomNav.visibility = View.GONE
-                R.id.homeFragment -> bottomNav.visibility = View.VISIBLE
-                R.id.productsFragment -> bottomNav.visibility = View.VISIBLE
+                R.id.homeFragment,
+                R.id.productsFragment,
+                R.id.wishlistFragment,
+                R.id.cartFragment -> bottomNav.visibility = View.VISIBLE
                 else -> bottomNav.visibility = View.GONE
             }
         }

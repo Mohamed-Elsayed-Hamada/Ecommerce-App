@@ -1,101 +1,100 @@
 package com.example.e_commerce.data.cart_wishlist.models
+
 import com.google.gson.annotations.SerializedName
 
 data class CartResponse(
     @SerializedName("cartId")
-    val cartId: String,
+    val cartId: String? = null,
     @SerializedName("data")
-    val data: CartResponseData,
+    val data: CartResponseData? = null,
     @SerializedName("message")
-    val message: String,
+    val message: String = "",
     @SerializedName("numOfCartItems")
-    val numOfCartItems: Int,
+    val numOfCartItems: Int = 0,
     @SerializedName("status")
-    val status: String
+    val status: String = ""
 )
 
 data class CartResponseData(
     @SerializedName("cartOwner")
-    val cartOwner: String,
+    val cartOwner: String = "",
     @SerializedName("createdAt")
-    val createdAt: String,
+    val createdAt: String = "",
     @SerializedName("_id")
-    val id: String,
+    val id: String = "",
     @SerializedName("products")
-    val products: List<Product>,
+    val products: List<Product>? = null,
     @SerializedName("totalCartPrice")
-    val totalCartPrice: Int,
+    val totalCartPrice: Double = 0.0,
     @SerializedName("updatedAt")
-    val updatedAt: String,
+    val updatedAt: String = "",
     @SerializedName("__v")
-    val v: Int
+    val v: Int = 0
 )
 
 data class Product(
     @SerializedName("count")
-    val count: Int,
+    val count: Int = 0,
     @SerializedName("_id")
-    val id: String,
+    val id: String = "",
     @SerializedName("price")
-    val price: Int,
+    val price: Double = 0.0,
     @SerializedName("product")
     val product: ProductX
 )
 
 data class ProductX(
     @SerializedName("brand")
-    val brand: Brand,
+    val brand: Brand? = null,
     @SerializedName("category")
-    val category: Category,
+    val category: Category? = null,
     @SerializedName("_id")
-    val _id: String,
+    val _id: String = "",
     @SerializedName("id")
-    val id: String,
+    val id: String = "",
     @SerializedName("imageCover")
-    val imageCover: String,
+    val imageCover: String = "",
     @SerializedName("quantity")
-    val quantity: Int,
+    val quantity: Int = 0,
     @SerializedName("ratingsAverage")
-    val ratingsAverage: Double,
+    val ratingsAverage: Double = 0.0,
     @SerializedName("slug")
-    val slug: String,
+    val slug: String = "",
     @SerializedName("subcategory")
-    val subcategory: List<Subcategory>,
+    val subcategory: List<Subcategory> = emptyList(),
     @SerializedName("title")
-    val title: String
+    val title: String = ""
 )
 
 data class Brand(
     @SerializedName("_id")
-    val id: String,
+    val id: String = "",
     @SerializedName("image")
-    val image: String,
+    val image: String = "",
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("slug")
-    val slug: String
+    val slug: String = ""
 )
 
 data class Category(
     @SerializedName("_id")
-    val id: String,
+    val id: String = "",
     @SerializedName("image")
-    val image: String,
+    val image: String = "",
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("slug")
-    val slug: String
+    val slug: String = ""
 )
 
 data class Subcategory(
     @SerializedName("category")
-    val category: String,
+    val category: String = "",
     @SerializedName("_id")
-    val id: String,
+    val id: String = "",
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("slug")
-    val slug: String
+    val slug: String = ""
 )
-
-

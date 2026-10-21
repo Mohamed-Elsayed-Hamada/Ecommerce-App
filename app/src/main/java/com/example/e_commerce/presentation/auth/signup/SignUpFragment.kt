@@ -1,16 +1,20 @@
 package com.example.e_commerce.presentation.auth.signup
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.e_commerce.MainActivity
+import androidx.navigation.fragment.findNavController
+import com.example.e_commerce.R
 import com.example.e_commerce.data.auth.models.SignUpRequestModel
 import com.example.e_commerce.databinding.FragmentSignUpBinding
+import com.example.e_commerce.presentation.auth.AuthField
+import com.example.e_commerce.presentation.auth.AuthUiState
 import com.example.e_commerce.presentation.auth.AuthViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,15 +24,10 @@ class SignUpFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: AuthViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,49 +37,122 @@ class SignUpFragment : Fragment() {
         setUpClickListener()
         setObservers()
     }
-    private fun setUpClickListener(){
+
+    private fun setUpClickListener() {
         binding.btnRegister.setOnClickListener {
-            val name = binding.etName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val passworld = binding.etPassword.text.toString()
-            val rePassworld = binding.etRePassword.text.toString()
-            val phone = binding.etPhoneNumber.text.toString()
+            val name = binding.etName.text?.toString()?.trim().orEmpty()
+            val email = binding.etEmail.text?.toString()?.trim().orEmpty()
+            val password = binding.etPassword.text?.toString().orEmpty()
+            val rePassword = binding.etRePassword.text?.toString().orEmpty()
+            val phone = binding.etPhoneNumber.text?.toString()?.trim().orEmpty()
 
-            if (name.isNotEmpty() && email.isNotEmpty() && passworld.isNotEmpty() && rePassworld.isNotEmpty()) {
-                if(passworld == rePassworld){
-                    viewModel.signUp(SignUpRequestModel(email, name, passworld, phone, rePassworld))
-                }else{
-                    binding.tilRePassword.error = "Passwords do not match"
-                }
-            }
-            else
-            {
-                binding.tilName.error = "please fill all fields"
-                binding.tilEmail.error = "please fill all fields"
-                binding.tilPassword.error = "please fill all fields"
-                binding.tilRePassword.error = "please fill all fields"
-                binding.tilPhoneNumber.error = "please fill all fields"
+            clearErrors()
 
+            var valid = true
+            if (name.isBlank()) {
+                binding.tilName.error = getString(R.string.error_fill_all_fields)
+                valid = false
             }
-        }
-    }
-    private fun setObservers(){
-        viewModel.signInResponse.observe(viewLifecycleOwner) { response ->
-            if (response.message.lowercase() == "success") {
-                val intet = Intent(requireContext(), MainActivity::class.java)
-                startActivity(intet)
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.tilEmail.error = getString(R.string.error_invalid_email)
+                valid = false
             }
-        }
-        viewModel.errorFlag.observe(viewLifecycleOwner){
+            if (phone.count { it.isDigit() } < MIN_PHONE_DIGITS) {
+                binding.tilPhoneNumber.error = getString(R.string.error_invalid_phone)
+                valid = false
+            }
+            if (password.length < MIN_PASSWORD_LENGTH) {
+                binding.tilPassword.error = resources.getQuantityString(
+                    R.plurals.password_min_length,
+                    MIN_PASSWORD_LENGTH,
+                    MIN_PASSWORD_LENGTH
+                )
+                valid = false
+            }
+            if (password != rePassword) {
+                binding.tilRePassword.error = getString(R.string.error_passwords_dont_match)
+                valid = false
+            }
 
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
-            if (loading) {
-                binding.progressBar.visibility = View.VISIBLE
+            if (valid) {
+                viewModel.signUp(SignUpRequestModel(email, name, password, phone, rePassword))
             } else {
-                binding.progressBar.visibility = View.GONE
+                Snackbar.make(binding.root, R.string.error_check_fields, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.tvSignIn.setOnClickListener {
+            val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setObservers() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            binding.progressBar.visibility =
+                if (state is AuthUiState.Loading) View.VISIBLE else View.GONE
+            binding.btnRegister.isEnabled = state !is AuthUiState.Loading
+
+            when (state) {
+                is AuthUiState.SignedIn -> {
+                    if (findNavController().currentDestination?.id == R.id.signUpFragment) {
+                        val action = SignUpFragmentDirections.actionSignUpFragmentToHomeyFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+
+                is AuthUiState.FieldError -> {
+                    showFieldError(state.field, state.message)
+                    Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                    viewModel.resetState()
+                }
+
+                is AuthUiState.ValidationError -> {
+                    showFieldError(state.field, getString(state.messageRes))
+                    viewModel.resetState()
+                }
+
+                is AuthUiState.Error -> {
+                    Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                    viewModel.resetState()
+                }
+
+                is AuthUiState.NetworkError -> {
+                    Snackbar.make(binding.root, R.string.error_network, Snackbar.LENGTH_LONG).show()
+                    viewModel.resetState()
+                }
+
+                is AuthUiState.Loading, is AuthUiState.Idle -> Unit
             }
         }
     }
 
+    private fun showFieldError(field: AuthField, message: String) {
+        when (field) {
+            AuthField.EMAIL -> binding.tilEmail.error = message
+            AuthField.PASSWORD -> binding.tilPassword.error = message
+            AuthField.RE_PASSWORD -> binding.tilRePassword.error = message
+            AuthField.PHONE -> binding.tilPhoneNumber.error = message
+            AuthField.NAME -> binding.tilName.error = message
+            AuthField.GENERAL -> Unit
+        }
+    }
+
+    private fun clearErrors() {
+        binding.tilName.error = null
+        binding.tilEmail.error = null
+        binding.tilPassword.error = null
+        binding.tilRePassword.error = null
+        binding.tilPhoneNumber.error = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private companion object {
+        const val MIN_PASSWORD_LENGTH = 6
+        const val MIN_PHONE_DIGITS = 7
+    }
 }
